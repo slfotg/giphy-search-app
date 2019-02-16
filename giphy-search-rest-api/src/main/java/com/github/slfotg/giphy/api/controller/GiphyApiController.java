@@ -52,9 +52,8 @@ public class GiphyApiController {
     public ErrorResponse handleException(InvalidRequest invalidForm) {
         Errors errors = invalidForm.getErrors();
         ErrorResponse response = new ErrorResponse();
-        errors.getAllErrors().forEach(error -> {
-            response.addError(new ErrorMessage(error.getObjectName(), error.getDefaultMessage()));
-        });
+        errors.getAllErrors().forEach(
+                error -> response.addError(new ErrorMessage(error.getObjectName(), error.getDefaultMessage())));
         return response;
     }
 }
