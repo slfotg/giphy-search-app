@@ -1,4 +1,4 @@
-package com.github.slfotg.giphy.api.model;
+package com.github.slfotg.giphy.api.response;
 
 import java.util.LinkedList;
 import java.util.List;

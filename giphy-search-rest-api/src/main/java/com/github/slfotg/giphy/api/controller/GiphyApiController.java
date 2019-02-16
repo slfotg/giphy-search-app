@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.slfotg.giphy.api.exception.InvalidRequest;
-import com.github.slfotg.giphy.api.model.ErrorResponse;
-import com.github.slfotg.giphy.api.model.ErrorResponse.ErrorMessage;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
+import com.github.slfotg.giphy.api.response.ErrorResponse;
+import com.github.slfotg.giphy.api.response.ErrorResponse.ErrorMessage;
 import com.github.slfotg.giphy.api.service.GiphyApiService;
 
 @RestController
