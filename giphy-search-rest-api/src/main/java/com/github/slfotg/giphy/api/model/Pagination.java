@@ -1,5 +1,7 @@
 package com.github.slfotg.giphy.api.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -10,7 +12,9 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
  *
  */
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Pagination {
+public class Pagination implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer offset;
     private Integer totalCount;
@@ -28,8 +32,7 @@ public class Pagination {
     /**
      * Set the position in pagination
      * 
-     * @param offset
-     *            the position in pagination
+     * @param offset the position in pagination
      */
     public void setOffset(Integer offset) {
         this.offset = offset;
@@ -47,8 +50,7 @@ public class Pagination {
     /**
      * Set the total number of items available
      * 
-     * @param totalCount
-     *            the total number of items available
+     * @param totalCount the total number of items available
      */
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
@@ -66,8 +68,7 @@ public class Pagination {
     /**
      * Set the total number of items returned
      * 
-     * @param count
-     *            the total number of items returned
+     * @param count the total number of items returned
      */
     public void setCount(Integer count) {
         this.count = count;

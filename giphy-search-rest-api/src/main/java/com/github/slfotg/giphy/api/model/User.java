@@ -1,5 +1,6 @@
 package com.github.slfotg.giphy.api.model;
 
+import java.io.Serializable;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -11,7 +12,9 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
  *
  */
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private URL avatarUrl;
     private URL bannerUrl;
@@ -32,8 +35,7 @@ public class User {
     /**
      * Set the URL for this user's avatar image
      * 
-     * @param avatarUrl
-     *            the URL for this user's avatar image
+     * @param avatarUrl the URL for this user's avatar image
      */
     public void setAvatarUrl(URL avatarUrl) {
         this.avatarUrl = avatarUrl;
@@ -51,8 +53,7 @@ public class User {
     /**
      * Set the URL for the banner image that appears atop this user's profile page
      * 
-     * @param bannerUrl
-     *            the URL for the banner image
+     * @param bannerUrl the URL for the banner image
      */
     public void setBannerUrl(URL bannerUrl) {
         this.bannerUrl = bannerUrl;
@@ -70,8 +71,7 @@ public class User {
     /**
      * Set the URL for this user's profile
      * 
-     * @param profileUrl
-     *            the URL for this user's profile
+     * @param profileUrl the URL for this user's profile
      */
     public void setProfileUrl(URL profileUrl) {
         this.profileUrl = profileUrl;
@@ -89,8 +89,7 @@ public class User {
     /**
      * Set the username associated with this user
      * 
-     * @param username
-     *            the username associated with this user
+     * @param username the username associated with this user
      */
     public void setUsername(String username) {
         this.username = username;
@@ -110,8 +109,7 @@ public class User {
      * Set the display name associated with this user (contains formatting the base
      * username might not)
      * 
-     * @param displayName
-     *            the display name associated with this user
+     * @param displayName the display name associated with this user
      */
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
@@ -129,8 +127,7 @@ public class User {
     /**
      * Set the Twitter username associated with this user
      * 
-     * @param twitter
-     *            the Twitter username associated with this user
+     * @param twitter the Twitter username associated with this user
      */
     public void setTwitter(String twitter) {
         this.twitter = twitter;

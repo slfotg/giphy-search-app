@@ -1,12 +1,19 @@
 package com.github.slfotg.giphy.api.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+/**
+ * Represents the response from the Giphy API from the search and trending
+ * endpoints
+ */
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class SearchResults {
+public class SearchResults implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private List<GifObject> data;
     private Metadata meta;

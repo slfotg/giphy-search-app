@@ -1,4 +1,4 @@
-package com.github.slfotg.giphy.api;
+package com.github.slfotg.giphy.api.model;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;

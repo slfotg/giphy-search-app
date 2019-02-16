@@ -17,11 +17,14 @@ class DefaultGiphyApiService implements GiphyApiService {
 
     @Autowired
     private GiphyConfigurationProperties giphyConfig;
+    
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public SearchResults search(SearchRequest request) {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForEntity(generateSearchURI(request), SearchResults.class).getBody();
+        URI searchURI = generateSearchURI(request);
+        return restTemplate.getForEntity(searchURI, SearchResults.class).getBody();
     }
 
     protected URI generateSearchURI(SearchRequest request) {

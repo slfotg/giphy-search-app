@@ -1,4 +1,4 @@
-package com.github.slfotg.giphy.api;
+package com.github.slfotg.giphy.api.model;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -15,7 +15,7 @@ import com.github.slfotg.giphy.api.model.Pagination;
 public class PaginationTest {
 
     private Pagination pagination;
-    private ObjectMapper mapper;
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void initPagination() {
@@ -23,7 +23,6 @@ public class PaginationTest {
         pagination.setCount(5);
         pagination.setOffset(54);
         pagination.setTotalCount(1023);
-        mapper = new ObjectMapper();
     }
 
     @Test

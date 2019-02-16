@@ -1,10 +1,14 @@
 package com.github.slfotg.giphy.api.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Images {
+public class Images implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Image fixedHeight;
     private Image fixedHeightStill;
