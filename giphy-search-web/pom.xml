@@ -8,6 +8,14 @@
     </parent>
     <artifactId>giphy-search-web</artifactId>
     <description>Giphy API Frontend Project</description>
+    
+    <properties>
+        <docker.mysql.rootPassword>rootPassword</docker.mysql.rootPassword>
+        <docker.mysql.database>giphy_db</docker.mysql.database>
+        <docker.mysql.user>giphy_user</docker.mysql.user>
+        <docker.mysql.password>giphyPassword</docker.mysql.password>
+        <docker.mysql.url>jdbc:mysql://db:3306/${docker.mysql.database}?verifyServerCertificate=false&amp;useSSL=true</docker.mysql.url>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -93,6 +101,78 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>db</alias>
+                            <name>mysql:8.0.15</name>
+                            <run>
+                                <env>
+                                    <MYSQL_ROOT_PASSWORD>${docker.mysql.rootPassword}</MYSQL_ROOT_PASSWORD>
+                                    <MYSQL_DATABASE>${docker.mysql.database}</MYSQL_DATABASE>
+                                    <MYSQL_USER>${docker.mysql.user}</MYSQL_USER>
+                                    <MYSQL_PASSWORD>${docker.mysql.password}</MYSQL_PASSWORD>
+                                </env>
+                                <ports>
+                                    <port>13306:3306</port>
+                                </ports>
+                                <wait>
+                                    <log>socket: '/var/run/mysqld/mysqld.sock'.*port: 3306</log>
+                                    <time>300000</time>
+                                </wait>
+                                <log>
+                                    <prefix>MySQL</prefix>
+                                    <color>yellow</color>
+                                </log>
+                            </run>
+                        </image>
+                        
+                        <image>
+                            <alias>webapp</alias>
+                            <name>${project.artifactId}:${project.version}</name>
+
+                            <build>
+                                <from>openjdk:8u191-jre-alpine3.9</from>
+                                <assembly>
+                                    <descriptor>${basedir}/src/main/docker/assembly.xml</descriptor>
+                                </assembly>
+
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <cmd>java -jar /maven/giphy-search-web.jar</cmd>
+                            </build>
+
+                            <run>
+                                <env>
+                                    <GIPHY_DATASOURCE_URL>${docker.mysql.url}</GIPHY_DATASOURCE_URL>
+                                    <GIPHY_DATASOURCE_USERNAME>${docker.mysql.user}</GIPHY_DATASOURCE_USERNAME>
+                                    <GIPHY_DATASOURCE_PASSWORD>${docker.mysql.password}</GIPHY_DATASOURCE_PASSWORD>
+                                    <SPRING_PROFILES_ACTIVE>docker</SPRING_PROFILES_ACTIVE>
+                                </env>
+                                <ports>
+                                    <port>18080:8080</port>
+                                </ports>
+                                <wait>
+                                    <url>http://${docker.host.address}:18080/check</url>
+                                    <time>60000</time>
+                                </wait>
+                                <links>
+                                    <link>db:db</link>
+                                </links>
+                                <log>
+                                    <prefix>WEB</prefix>
+                                    <color>cyan</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
         </plugins>
     </build>

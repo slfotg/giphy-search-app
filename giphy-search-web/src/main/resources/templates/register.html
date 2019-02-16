@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title th:text="#{page.title.register}">register</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.2.1/css/bootstrap.min.css"
+    th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.0.0/jquery.min.js" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+</head>
+<body>
+    <h1 th:text="#{page.title.register}">Register</h1>
+    <form action="@{/register}" th:object="${registerForm}" method="POST" enctype="utf8">
+        <div>
+            <label th:text="#{label.username}">username</label>
+            <input type="email" th:field="*{username}" />
+            <p th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label th:text="#{label.password}">password</label>
+            <input type="password" th:field="*{password}" />
+            <p th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label th:text="#{label.confirmPassword}">confirm</label>
+            <input type="password" th:field="*{passwordMatch}" />
+        </div>
+        <button type="submit" th:text="#{text.submit}">submit</button>
+    </form>
+
+    <a th:href="@{/login}" th:text="#{text.login}">login</a>
+</body>
+</html>
