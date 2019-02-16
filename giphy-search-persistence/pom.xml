@@ -6,6 +6,17 @@
         <artifactId>giphy-search-app</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>giphy-search-domain</artifactId>
-    <description>Giphy Persistence Classes</description>
+    <artifactId>giphy-search-persistence</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -20,7 +20,7 @@
 
     <modules>
         <module>giphy-search-web</module>
-        <module>giphy-search-domain</module>
+        <module>giphy-search-persistence</module>
     </modules>
 
     <build>
