@@ -54,8 +54,8 @@ public class Image {
         return frames;
     }
 
-    public void setFrames(String size) {
-        this.size = size;
+    public void setFrames(String frames) {
+        this.frames = frames;
     }
 
     public URL getMp4() {
