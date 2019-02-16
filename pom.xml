@@ -21,6 +21,7 @@
     <modules>
         <module>giphy-search-web</module>
         <module>giphy-search-persistence</module>
+        <module>giphy-search-rest-api</module>
     </modules>
 
     <build>
