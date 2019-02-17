@@ -61,8 +61,9 @@
 
                                 <ports>
                                     <port>8080</port>
+                                    <port>8000</port>
                                 </ports>
-                                <cmd>java -jar /maven/giphy-search-rest-api.jar</cmd>
+                                <cmd>java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar /maven/giphy-search-rest-api.jar</cmd>
                             </build>
                         </image>
                     </images>
