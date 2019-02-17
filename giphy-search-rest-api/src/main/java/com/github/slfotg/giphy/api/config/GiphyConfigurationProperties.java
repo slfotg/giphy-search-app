@@ -46,7 +46,9 @@ public class GiphyConfigurationProperties {
     }
 
     public void setApiKey(String apiKey) {
-        logger.info("Setting apiKey to {}*******", apiKey.substring(0, 4));
+        if (logger.isInfoEnabled()) {
+            logger.info("Setting apiKey to {}*******", apiKey.substring(0, 4));
+        }
         this.apiKey = apiKey;
     }
 

@@ -14,7 +14,7 @@ public class Metadata implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String message;
+    private String msg;
     private Integer status;
     private String responseId;
 
@@ -23,8 +23,8 @@ public class Metadata implements Serializable {
      * 
      * @return the HTTP Response Message
      */
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
     /**
@@ -32,8 +32,8 @@ public class Metadata implements Serializable {
      * 
      * @param message the HTTP Response Message
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     /**

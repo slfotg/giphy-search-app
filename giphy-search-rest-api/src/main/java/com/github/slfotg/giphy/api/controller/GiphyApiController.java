@@ -19,7 +19,6 @@ import com.github.slfotg.giphy.api.exception.InvalidRequest;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.response.ErrorResponse;
-import com.github.slfotg.giphy.api.response.ErrorResponse.ErrorMessage;
 import com.github.slfotg.giphy.api.service.GiphyApiService;
 
 @RestController
@@ -50,10 +49,6 @@ public class GiphyApiController {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleException(InvalidRequest invalidForm) {
-        Errors errors = invalidForm.getErrors();
-        ErrorResponse response = new ErrorResponse();
-        errors.getAllErrors().forEach(
-                error -> response.addError(new ErrorMessage(error.getObjectName(), error.getDefaultMessage())));
-        return response;
+        return invalidForm.getErrorResponse();
     }
 }

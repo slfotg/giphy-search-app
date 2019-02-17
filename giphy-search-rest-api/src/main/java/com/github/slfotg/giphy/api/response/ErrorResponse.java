@@ -1,9 +1,12 @@
 package com.github.slfotg.giphy.api.response;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ErrorResponse {
+public class ErrorResponse implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private List<ErrorMessage> errors = new LinkedList<>();
 
