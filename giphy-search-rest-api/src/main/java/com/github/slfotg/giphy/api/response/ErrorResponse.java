@@ -18,9 +18,16 @@ public class ErrorResponse implements Serializable {
         return errors;
     }
 
-    public static class ErrorMessage {
+    public static class ErrorMessage implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
         private String objectName;
         private String message;
+
+        public ErrorMessage() {
+            // default constructor
+        }
 
         public ErrorMessage(String objectName, String message) {
             this.objectName = objectName;
@@ -31,8 +38,16 @@ public class ErrorResponse implements Serializable {
             return objectName;
         }
 
+        public void getObjectName(String objectName) {
+            this.objectName = objectName;
+        }
+
         public String getMessage() {
             return message;
+        }
+
+        public void getMessage(String message) {
+            this.message = message;
         }
     }
 }
