@@ -24,7 +24,7 @@
         <docker.mysql.url>jdbc:mysql://db:3306/${docker.mysql.database}?verifyServerCertificate=false&amp;useSSL=true</docker.mysql.url>
         <docker.db.alias>db</docker.db.alias>
         <docker.rest.alias>rest</docker.rest.alias>
-        <docker.rest.alias>web</docker.rest.alias>
+        <docker.web.alias>web</docker.web.alias>
     </properties>
 
     <modules>
