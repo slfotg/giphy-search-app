@@ -12,10 +12,10 @@
 </head>
 <body>
     <h1 th:text="#{page.title.register}">Register</h1>
-    <form action="@{/register}" th:object="${registerForm}" method="POST" enctype="utf8">
+    <form th:action="@{/register}" th:object="${registerForm}" method="POST" enctype="utf8">
         <div>
             <label th:text="#{label.username}">username</label>
-            <input type="email" th:field="*{username}" />
+            <input type="text" th:field="*{username}" />
             <p th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation error</p>
         </div>
         <div>
@@ -26,6 +26,7 @@
         <div>
             <label th:text="#{label.confirmPassword}">confirm</label>
             <input type="password" th:field="*{passwordMatch}" />
+            <p th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error</p>
         </div>
         <button type="submit" th:text="#{text.submit}">submit</button>
     </form>

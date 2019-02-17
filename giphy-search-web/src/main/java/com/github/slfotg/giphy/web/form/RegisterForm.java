@@ -2,26 +2,25 @@ package com.github.slfotg.giphy.web.form;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.github.slfotg.giphy.web.form.validation.PasswordsMatch;
 
-@PasswordsMatch
+@PasswordsMatch(message = "{message.passwordMatch}")
 public class RegisterForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "{message.emptyUsername}")
+    @Size(min = 2, max = 20, message = "{message.usernameLength}")
     private String username;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "{message.emptyPassword}")
+    @Size(min = 12, max = 40, message = "{message.passwordLength}")
     private String password;
 
     @NotNull
-    @NotEmpty
     private String passwordMatch;
 
     public String getUsername() {

@@ -17,7 +17,7 @@ import com.github.slfotg.giphy.web.form.RegisterForm;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-    
+
     @Autowired
     private GiphyUserService giphyUserService;
 
@@ -29,13 +29,11 @@ public class RegisterController {
     }
 
     @PostMapping({ "", "/" })
-    public String registerNewUser(@ModelAttribute("registerForm") @Valid RegisterForm form, Model model,
-            BindingResult bindingResult) {
+    public String registerNewUser(@Valid RegisterForm form, BindingResult bindingResult) {
         if (!bindingResult.hasErrors() && giphyUserService.userExists(form.getUsername())) {
             bindingResult.rejectValue("username", "message.usernameExists");
         }
         if (bindingResult.hasErrors()) {
-            model.addAttribute("registerForm", form);
             return "register";
         }
         giphyUserService.registerNewUser(form.getUsername(), form.getPassword());
