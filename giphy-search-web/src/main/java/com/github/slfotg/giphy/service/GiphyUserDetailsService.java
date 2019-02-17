@@ -21,7 +21,7 @@ public class GiphyUserDetailsService implements UserDetailsService {
     private GiphyUserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         GiphyUser user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
