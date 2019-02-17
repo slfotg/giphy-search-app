@@ -2,6 +2,7 @@ package com.github.slfotg.giphy.web.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,22 +11,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.slfotg.giphy.service.GiphyUserService;
 import com.github.slfotg.giphy.web.form.RegisterForm;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+    
+    @Autowired
+    private GiphyUserService giphyUserService;
 
     @GetMapping({ "", "/" })
     public String register(Model model) {
         RegisterForm form = new RegisterForm();
-        model.addAttribute("registrationForm", form);
+        model.addAttribute("registerForm", form);
         return "register";
     }
 
     @PostMapping({ "", "/" })
-    public String registerNewUser(@ModelAttribute("registerForm") @Valid RegisterForm form,
+    public String registerNewUser(@ModelAttribute("registerForm") @Valid RegisterForm form, Model model,
             BindingResult bindingResult) {
-        return "register";
+        if (!bindingResult.hasErrors() && giphyUserService.userExists(form.getUsername())) {
+            bindingResult.rejectValue("username", "message.usernameExists");
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("registerForm", form);
+            return "register";
+        }
+        giphyUserService.registerNewUser(form.getUsername(), form.getPassword());
+        return "redirect:/login";
     }
 }
