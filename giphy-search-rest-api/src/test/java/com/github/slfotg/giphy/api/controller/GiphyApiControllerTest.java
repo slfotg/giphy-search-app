@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.response.ErrorResponse;
-import com.github.slfotg.giphy.api.response.ErrorResponse.ErrorMessage;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
