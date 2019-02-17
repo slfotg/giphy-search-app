@@ -18,7 +18,7 @@ import com.github.slfotg.giphy.api.request.SearchRequest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class GiphyApiControllerIT {
+public class GiphyApiControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
