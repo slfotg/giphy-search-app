@@ -26,7 +26,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>giphy-search-rest-api</artifactId>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -121,7 +121,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <alias>db</alias>
+                            <alias>${docker.db.alias}</alias>
                             <name>mysql:8.0.15</name>
                             <run>
                                 <env>
@@ -145,7 +145,7 @@
                         </image>
 
                         <image>
-                            <alias>rest-api</alias>
+                            <alias>${docker.rest.alias}</alias>
                             <name>giphy-search-rest-api:${project.version}</name>
 
                             <run>
@@ -160,7 +160,7 @@
                                     <time>60000</time>
                                 </wait>
                                 <links>
-                                    <link>db:db</link>
+                                    <link>${docker.db.alias}:${docker.db.alias}</link>
                                 </links>
                                 <log>
                                     <prefix>REST</prefix>
@@ -170,7 +170,7 @@
                         </image>
 
                         <image>
-                            <alias>webapp</alias>
+                            <alias>${docker.web.alias}</alias>
                             <name>${project.artifactId}:${project.version}</name>
 
                             <build>
@@ -191,12 +191,15 @@
                                     <GIPHY_DATASOURCE_USERNAME>${docker.mysql.user}</GIPHY_DATASOURCE_USERNAME>
                                     <GIPHY_DATASOURCE_PASSWORD>${docker.mysql.password}</GIPHY_DATASOURCE_PASSWORD>
                                     <SPRING_PROFILES_ACTIVE>docker</SPRING_PROFILES_ACTIVE>
+                                    <GIPHY_REST_HOST>${docker.rest.alias}</GIPHY_REST_HOST>
+                                    <GIPHY_REST_PORT>8080</GIPHY_REST_PORT>
                                 </env>
                                 <ports>
                                     <port>18080:8080</port>
                                 </ports>
                                 <links>
-                                    <link>db:db</link>
+                                    <link>${docker.db.alias}:${docker.db.alias}</link>
+                                    <link>${docker.rest.alias}:${docker.rest.alias}</link>
                                 </links>
                                 <log>
                                     <prefix>WEB</prefix>

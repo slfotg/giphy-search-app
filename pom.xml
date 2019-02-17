@@ -22,6 +22,9 @@
         <docker.mysql.user>giphy_user</docker.mysql.user>
         <docker.mysql.password>giphyPassword</docker.mysql.password>
         <docker.mysql.url>jdbc:mysql://db:3306/${docker.mysql.database}?verifyServerCertificate=false&amp;useSSL=true</docker.mysql.url>
+        <docker.db.alias>db</docker.db.alias>
+        <docker.rest.alias>rest</docker.rest.alias>
+        <docker.rest.alias>web</docker.rest.alias>
     </properties>
 
     <modules>
