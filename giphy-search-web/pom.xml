@@ -24,6 +24,12 @@
         </dependency>
 
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>giphy-search-rest-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
@@ -139,6 +145,31 @@
                         </image>
 
                         <image>
+                            <alias>rest-api</alias>
+                            <name>giphy-search-rest-api:${project.version}</name>
+
+                            <run>
+                                <env>
+                                    <GIPHY_API_KEY>${env.GIPHY_API_KEY}</GIPHY_API_KEY>
+                                </env>
+                                <ports>
+                                    <port>18081:8080</port>
+                                </ports>
+                                <wait>
+                                    <url>http://${docker.host.address}:18081/api/</url>
+                                    <time>60000</time>
+                                </wait>
+                                <links>
+                                    <link>db:db</link>
+                                </links>
+                                <log>
+                                    <prefix>REST</prefix>
+                                    <color>green</color>
+                                </log>
+                            </run>
+                        </image>
+
+                        <image>
                             <alias>webapp</alias>
                             <name>${project.artifactId}:${project.version}</name>
 
@@ -164,10 +195,6 @@
                                 <ports>
                                     <port>18080:8080</port>
                                 </ports>
-                                <wait>
-                                    <url>http://${docker.host.address}:18080/check</url>
-                                    <time>60000</time>
-                                </wait>
                                 <links>
                                     <link>db:db</link>
                                 </links>

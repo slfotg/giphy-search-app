@@ -16,6 +16,12 @@
         <java.version>1.8</java.version>
         <docker.maven.plugin.fabric8.version>0.28.0</docker.maven.plugin.fabric8.version>
         <jacoco.version>0.8.3</jacoco.version>
+
+        <docker.mysql.rootPassword>rootPassword</docker.mysql.rootPassword>
+        <docker.mysql.database>giphy_db</docker.mysql.database>
+        <docker.mysql.user>giphy_user</docker.mysql.user>
+        <docker.mysql.password>giphyPassword</docker.mysql.password>
+        <docker.mysql.url>jdbc:mysql://db:3306/${docker.mysql.database}?verifyServerCertificate=false&amp;useSSL=true</docker.mysql.url>
     </properties>
 
     <modules>

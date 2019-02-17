@@ -38,4 +38,37 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${project.artifactId}:${project.version}</name>
+
+                            <build>
+                                <from>openjdk:8u191-jre-alpine3.9</from>
+                                <assembly>
+                                    <descriptor>${basedir}/src/main/docker/assembly.xml</descriptor>
+                                </assembly>
+
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <cmd>java -jar /maven/giphy-search-rest-api.jar</cmd>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
