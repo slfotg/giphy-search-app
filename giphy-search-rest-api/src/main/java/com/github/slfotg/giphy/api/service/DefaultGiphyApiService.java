@@ -17,7 +17,7 @@ class DefaultGiphyApiService implements GiphyApiService {
 
     @Autowired
     private GiphyConfigurationProperties giphyConfig;
-    
+
     @Autowired
     private RestTemplate restTemplate;
 
