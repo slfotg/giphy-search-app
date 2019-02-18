@@ -1,6 +1,7 @@
 package com.github.slfotg.giphy.domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,12 +26,15 @@ public class GifCategory implements Serializable {
     @Column(name = "CATEGORY_ID")
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
-    private GiphyUser user;
+    private GiphyUser giphyUser;
 
     @Column(name = "CATEGORY_NAME", nullable = false, length = 30)
     private String categoryName;
+
+    @OneToMany(mappedBy = "id.category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<CategorizedGifImage> categorizedImages;
 
     public Integer getId() {
         return id;
@@ -39,12 +44,12 @@ public class GifCategory implements Serializable {
         this.id = id;
     }
 
-    public GiphyUser getUser() {
-        return user;
+    public GiphyUser getGiphyUser() {
+        return giphyUser;
     }
 
-    public void setUser(GiphyUser user) {
-        this.user = user;
+    public void setGiphyUser(GiphyUser giphyUser) {
+        this.giphyUser = giphyUser;
     }
 
     public String getCategoryName() {

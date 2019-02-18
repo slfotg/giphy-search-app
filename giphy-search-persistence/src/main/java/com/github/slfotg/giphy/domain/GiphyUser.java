@@ -3,11 +3,13 @@ package com.github.slfotg.giphy.domain;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +29,11 @@ public class GiphyUser implements Serializable {
     @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
 
-    //private Collection<GifCategory> categories;
+    @OneToMany(mappedBy = "giphyUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<GifCategory> categories;
+
+    @OneToMany(mappedBy = "id.giphyUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<GiphyUserFavorites> favorites;
 
     public Integer getId() {
         return id;
@@ -52,4 +58,21 @@ public class GiphyUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Collection<GifCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<GifCategory> categories) {
+        this.categories = categories;
+    }
+
+    public Collection<GiphyUserFavorites> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Collection<GiphyUserFavorites> favorites) {
+        this.favorites = favorites;
+    }
+
 }

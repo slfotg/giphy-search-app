@@ -11,24 +11,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "GIF_IMAGE")
-public class CategorizedGifImage implements Serializable {
+@Table(name = "GIPHY_USER_FAVORITES")
+public class GiphyUserFavorites implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    CategorizedGifImageId id;
+    GiphyUserFavoritesId id;
 
-    public CategorizedGifImageId getId() {
+    public GiphyUserFavoritesId getId() {
         return id;
     }
 
-    public void setId(CategorizedGifImageId id) {
+    public void setId(GiphyUserFavoritesId id) {
         this.id = id;
     }
 
-    public GifCategory getCategory() {
-        return id.category;
+    public GiphyUser getGiphyUser() {
+        return id.giphyUser;
     }
 
     public String getImageId() {
@@ -36,23 +36,23 @@ public class CategorizedGifImage implements Serializable {
     }
 
     @Embeddable
-    public static class CategorizedGifImageId implements Serializable {
+    public static class GiphyUserFavoritesId implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
         @ManyToOne
-        @JoinColumn(name = "CATEGORY_ID", nullable = false)
-        private GifCategory category;
+        @JoinColumn(name = "USER_ID", nullable = false)
+        private GiphyUser giphyUser;
 
         @Column(name = "IMAGE_ID", nullable = false, length = 80)
         private String imageId;
 
-        public GifCategory getCategory() {
-            return category;
+        public GiphyUser getGiphyUser() {
+            return giphyUser;
         }
 
-        public void setCategory(GifCategory category) {
-            this.category = category;
+        public void setGiphyUser(GiphyUser giphyUser) {
+            this.giphyUser = giphyUser;
         }
 
         public String getImageId() {
