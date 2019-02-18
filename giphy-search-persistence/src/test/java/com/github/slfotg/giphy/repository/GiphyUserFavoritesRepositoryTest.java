@@ -63,4 +63,12 @@ public class GiphyUserFavoritesRepositoryTest {
         assertThat(fav.get().getGiphyUser().getId(), equalTo(user.getId()));
         assertThat(fav.get().getImageId(), equalTo(imageId));
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        favoritesRepo.deleteAll();
+
+        assertThat(favoritesRepo.count(), equalTo(0L));
+        assertThat(userRepo.count(), equalTo(2L));
+    }
 }

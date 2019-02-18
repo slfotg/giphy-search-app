@@ -29,16 +29,22 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 public class GiphyUserRepositoryTest {
 
     @Autowired
-    GiphyUserRepository repo;
+    GiphyUserRepository userRepo;
+
+    @Autowired
+    GiphyUserFavoritesRepository favoritesRepo;
+
+    @Autowired
+    GifCategoryRepository categoryRepo;
 
     @Test
     public void testCount() throws Exception {
-        assertThat(repo.count(), equalTo(1L));
+        assertThat(userRepo.count(), equalTo(2L));
     }
 
     @Test
     public void testFindByUsername() throws Exception {
-        GiphyUser user = repo.findByUsername("sam");
+        GiphyUser user = userRepo.findByUsername("sam");
         assertThat(user.getUsername(), equalTo("sam"));
         assertThat(user.getId(), equalTo(1));
         assertThat(user.getPassword(), equalTo("password"));
@@ -49,7 +55,7 @@ public class GiphyUserRepositoryTest {
         GiphyUser user = new GiphyUser();
         user.setUsername("slfotg");
         user.setPassword("password");
-        user = repo.save(user);
+        user = userRepo.save(user);
         assertThat(user.getId(), notNullValue(Integer.class));
     }
 
@@ -58,18 +64,34 @@ public class GiphyUserRepositoryTest {
         GiphyUser user = new GiphyUser();
         user.setUsername("sam");
         user.setPassword("password");
-        user = repo.save(user);
+        user = userRepo.save(user);
     }
 
     @Test
     public void testFindUserFavorites() throws Exception {
-        GiphyUser user = repo.findByUsername("sam");
+        GiphyUser user = userRepo.findByUsername("sam");
         assertThat(user.getFavorites().size(), equalTo(10));
     }
 
     @Test
     public void testFindCategories() throws Exception {
-        GiphyUser user = repo.findByUsername("sam");
+        GiphyUser user = userRepo.findByUsername("sam");
         assertThat(user.getCategories().size(), equalTo(3));
+    }
+
+    @Test
+    public void testDeleteCascade() throws Exception {
+        userRepo.deleteAll();
+        assertThat(userRepo.count(), equalTo(0L));
+        assertThat(favoritesRepo.count(), equalTo(0L));
+        assertThat(categoryRepo.count(), equalTo(0L));
+    }
+
+    @Test
+    public void testDeleteCascadeSingleUser() throws Exception {
+        userRepo.deleteByUsername("sam");
+        assertThat(userRepo.count(), equalTo(1L));
+        assertThat(favoritesRepo.count(), equalTo(10L));
+        assertThat(categoryRepo.count(), equalTo(0L));
     }
 }

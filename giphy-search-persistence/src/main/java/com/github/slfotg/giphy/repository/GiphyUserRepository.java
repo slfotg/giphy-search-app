@@ -10,4 +10,6 @@ public interface GiphyUserRepository extends JpaRepository<GiphyUser, Long> {
 
     GiphyUser findByUsername(String username);
 
+    void deleteByUsername(String username);
+
 }

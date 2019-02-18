@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
     <GIPHY_USERS USER_ID="1" USERNAME="sam" PASSWORD="password" />
+    <GIPHY_USERS USER_ID="2" USERNAME="sam2" PASSWORD="password" />
 
     <GIPHY_USER_FAVORITES USER_ID="1" IMAGE_ID="aksdjakga;lja01" />
     <GIPHY_USER_FAVORITES USER_ID="1" IMAGE_ID="aksdjakga;lja02" />
@@ -12,6 +13,17 @@
     <GIPHY_USER_FAVORITES USER_ID="1" IMAGE_ID="aksdjakga;lja08" />
     <GIPHY_USER_FAVORITES USER_ID="1" IMAGE_ID="aksdjakga;lja09" />
     <GIPHY_USER_FAVORITES USER_ID="1" IMAGE_ID="aksdjakga;lja10" />
+
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja01" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja02" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja03" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja04" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja05" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja06" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja07" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja08" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja09" />
+    <GIPHY_USER_FAVORITES USER_ID="2" IMAGE_ID="aksdjakga;lja10" />
 
     <CATEGORY CATEGORY_ID="1" USER_ID="1" CATEGORY_NAME="funny" />
     <CATEGORY CATEGORY_ID="2" USER_ID="1" CATEGORY_NAME="sports" />
