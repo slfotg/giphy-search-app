@@ -37,6 +37,7 @@ public class ViewAndResourceConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
+    @Override
     public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
