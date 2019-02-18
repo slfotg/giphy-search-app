@@ -1,6 +1,7 @@
 package com.github.slfotg.giphy.domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,8 @@ public class GiphyUser implements Serializable {
 
     @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
+
+    private Collection<GifCategory> categories;
 
     public Integer getId() {
         return id;
