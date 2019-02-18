@@ -10,26 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "GIPHY_USERS")
 public class GiphyUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID")
+    private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "USERNAME", nullable = false, unique = true, length = 30)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

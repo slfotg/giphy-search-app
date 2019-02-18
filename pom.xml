@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -31,6 +30,7 @@
         <module>giphy-search-web</module>
         <module>giphy-search-persistence</module>
         <module>giphy-search-rest-api</module>
+        <module>giphy-search-db</module>
     </modules>
 
     <dependencyManagement>
@@ -131,6 +131,92 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>${docker.db.alias}</alias>
+                            <name>slfotg/giphy-search-db:${project.version}</name>
+                            <run>
+                                <env>
+                                    <MYSQL_ROOT_PASSWORD>${docker.mysql.rootPassword}</MYSQL_ROOT_PASSWORD>
+                                    <MYSQL_DATABASE>${docker.mysql.database}</MYSQL_DATABASE>
+                                    <MYSQL_USER>${docker.mysql.user}</MYSQL_USER>
+                                    <MYSQL_PASSWORD>${docker.mysql.password}</MYSQL_PASSWORD>
+                                </env>
+                                <ports>
+                                    <port>13306:3306</port>
+                                </ports>
+                                <wait>
+                                    <log>socket: '/var/run/mysqld/mysqld.sock'.*port: 3306</log>
+                                    <time>300000</time>
+                                </wait>
+                                <log>
+                                    <prefix>MySQL</prefix>
+                                    <color>yellow</color>
+                                </log>
+                            </run>
+                        </image>
+
+                        <image>
+                            <alias>${docker.rest.alias}</alias>
+                            <name>slfotg/giphy-search-rest-api:${project.version}</name>
+
+                            <run>
+                                <env>
+                                    <GIPHY_API_KEY>${env.GIPHY_API_KEY}</GIPHY_API_KEY>
+                                </env>
+                                <ports>
+                                    <port>18081:8080</port>
+                                    <port>18001:8000</port>
+                                </ports>
+                                <wait>
+                                    <url>http://${docker.host.address}:18081/api/</url>
+                                    <time>60000</time>
+                                </wait>
+                                <links>
+                                    <link>${docker.db.alias}:${docker.db.alias}</link>
+                                </links>
+                                <log>
+                                    <prefix>REST</prefix>
+                                    <color>green</color>
+                                </log>
+                            </run>
+                        </image>
+
+                        <image>
+                            <alias>${docker.web.alias}</alias>
+                            <name>slfotg/giphy-search-web:${project.version}</name>
+
+                            <run>
+                                <env>
+                                    <GIPHY_DATASOURCE_URL>${docker.mysql.url}</GIPHY_DATASOURCE_URL>
+                                    <GIPHY_DATASOURCE_USERNAME>${docker.mysql.user}</GIPHY_DATASOURCE_USERNAME>
+                                    <GIPHY_DATASOURCE_PASSWORD>${docker.mysql.password}</GIPHY_DATASOURCE_PASSWORD>
+                                    <SPRING_PROFILES_ACTIVE>docker</SPRING_PROFILES_ACTIVE>
+                                    <GIPHY_REST_HOST>${docker.rest.alias}</GIPHY_REST_HOST>
+                                    <GIPHY_REST_PORT>8080</GIPHY_REST_PORT>
+                                </env>
+                                <ports>
+                                    <port>18080:8080</port>
+                                    <port>18000:8000</port>
+                                </ports>
+                                <links>
+                                    <link>${docker.db.alias}:${docker.db.alias}</link>
+                                    <link>${docker.rest.alias}:${docker.rest.alias}</link>
+                                </links>
+                                <log>
+                                    <prefix>WEB</prefix>
+                                    <color>cyan</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
         </plugins>
     </build>
