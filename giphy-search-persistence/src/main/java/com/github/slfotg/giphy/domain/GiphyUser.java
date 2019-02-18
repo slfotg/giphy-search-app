@@ -17,7 +17,7 @@ public class GiphyUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private Integer id;
 
@@ -27,7 +27,7 @@ public class GiphyUser implements Serializable {
     @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
 
-    private Collection<GifCategory> categories;
+    //private Collection<GifCategory> categories;
 
     public Integer getId() {
         return id;
