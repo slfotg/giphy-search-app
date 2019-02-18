@@ -1,6 +1,7 @@
 package com.github.slfotg.giphy.api.service;
 
 import java.net.URI;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,24 @@ class DefaultGiphyApiService implements GiphyApiService {
         return restTemplate.getForEntity(searchURI, SearchResults.class).getBody();
     }
 
+    @Override
+    public SearchResults trending() {
+        URI trendingURI = generateTrendingURI();
+        return restTemplate.getForEntity(trendingURI, SearchResults.class).getBody();
+    }
+
+    @Override
+    public SearchResults gifById(String gifId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public SearchResults gifsById(Collection<String> gifIds) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     protected URI generateSearchURI(SearchRequest request) {
         // @formatter:off
         return UriComponentsBuilder.newInstance()
@@ -39,6 +58,18 @@ class DefaultGiphyApiService implements GiphyApiService {
                 .queryParam("offset", request.getOffset())
                 .queryParam("rating", MpaaRating.G)
                 .queryParam("lang", "en").build().encode().toUri();
+        // @formatter:on
+    }
+
+    protected URI generateTrendingURI() {
+        // @formatter:off
+        return UriComponentsBuilder.newInstance()
+                .scheme("https")
+                .host(giphyConfig.getHost())
+                .path(giphyConfig.getTrendingEndpoint())
+                .queryParam("api_key", giphyConfig.getApiKey())
+                .queryParam("rating", MpaaRating.G)
+                .build().encode().toUri();
         // @formatter:on
     }
 

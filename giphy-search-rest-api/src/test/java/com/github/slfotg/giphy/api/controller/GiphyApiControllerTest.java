@@ -42,4 +42,10 @@ public class GiphyApiControllerTest {
                 ErrorResponse.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
     }
+
+    @Test
+    public void testTrending() throws Exception {
+        ResponseEntity<SearchResults> response = restTemplate.getForEntity("/api/trending", SearchResults.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    }
 }

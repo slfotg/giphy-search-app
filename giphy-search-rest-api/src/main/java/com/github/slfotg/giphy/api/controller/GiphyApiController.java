@@ -45,6 +45,12 @@ public class GiphyApiController {
         return giphyService.search(request);
     }
 
+    @GetMapping("/trending")
+    @ResponseBody
+    public SearchResults trending() {
+        return giphyService.trending();
+    }
+
     @ExceptionHandler(InvalidRequest.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
