@@ -16,7 +16,5 @@ Demo fronted app to search for gifs with the Giphy API
 ## Quickstart
 ```
 export GIPHY_API_KEY={insert giphy api key here}
-mvn clean install docker:build
-cd giphy-search-web
-mvn docker:run
+mvn clean install docker:build docker:run
 ```
