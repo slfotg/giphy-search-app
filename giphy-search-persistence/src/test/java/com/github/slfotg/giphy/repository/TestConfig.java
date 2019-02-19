@@ -45,7 +45,7 @@ public class TestConfig {
         em.setJpaProperties(additionalProperties());
         return em;
     }
-    
+
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
 
@@ -53,5 +53,5 @@ public class TestConfig {
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 
         return hibernateProperties;
-}
+    }
 }

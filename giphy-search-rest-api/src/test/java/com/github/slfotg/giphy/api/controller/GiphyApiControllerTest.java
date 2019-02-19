@@ -3,6 +3,7 @@ package com.github.slfotg.giphy.api.controller;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.response.ErrorResponse;
 
+// TODO - convert to unit test
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class GiphyApiControllerTest {
