@@ -19,6 +19,14 @@ public class CategorizedGifImage implements Serializable {
     @EmbeddedId
     CategorizedGifImageId id;
 
+    public CategorizedGifImage() {
+        // default no-arg constructor
+    }
+
+    public CategorizedGifImage(GifCategory category, String imageId) {
+        setId(new CategorizedGifImageId(category, imageId));
+    }
+
     public CategorizedGifImageId getId() {
         return id;
     }
@@ -64,6 +72,15 @@ public class CategorizedGifImage implements Serializable {
     public static class CategorizedGifImageId implements Serializable {
 
         private static final long serialVersionUID = 1L;
+
+        public CategorizedGifImageId() {
+            // default no-arg constructor
+        }
+
+        public CategorizedGifImageId(GifCategory category, String imageId) {
+            setCategory(category);
+            setImageId(imageId);
+        }
 
         @ManyToOne
         @JoinColumn(name = "CATEGORY_ID", nullable = false)

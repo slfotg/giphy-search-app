@@ -26,6 +26,15 @@ public class GifCategory implements Serializable {
     @Column(name = "CATEGORY_ID")
     private Integer id;
 
+    public GifCategory() {
+        // default no-arg constructor
+    }
+
+    public GifCategory(GiphyUser giphyUser, String categoryName) {
+        setGiphyUser(giphyUser);
+        setCategoryName(categoryName);
+    }
+
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private GiphyUser giphyUser;

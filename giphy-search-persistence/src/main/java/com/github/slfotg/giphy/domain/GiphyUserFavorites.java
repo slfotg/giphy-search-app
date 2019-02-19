@@ -19,6 +19,14 @@ public class GiphyUserFavorites implements Serializable {
     @EmbeddedId
     GiphyUserFavoritesId id;
 
+    public GiphyUserFavorites() {
+        // default no-arg constructor
+    }
+
+    public GiphyUserFavorites(GiphyUser giphyUser, String imageId) {
+        setId(new GiphyUserFavoritesId(giphyUser, imageId));
+    }
+
     public GiphyUserFavoritesId getId() {
         return id;
     }
@@ -64,6 +72,15 @@ public class GiphyUserFavorites implements Serializable {
     public static class GiphyUserFavoritesId implements Serializable {
 
         private static final long serialVersionUID = 1L;
+        
+        public GiphyUserFavoritesId() {
+            // default no-arg constructor
+        }
+
+        public GiphyUserFavoritesId(GiphyUser giphyUser, String imageId) {
+            setGiphyUser(giphyUser);
+            setImageId(imageId);
+        }
 
         @ManyToOne
         @JoinColumn(name = "USER_ID", nullable = false)

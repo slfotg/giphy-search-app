@@ -2,6 +2,7 @@ package com.github.slfotg.giphy.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,11 +23,11 @@ public class GiphyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        GiphyUser user = userRepository.findByUsername(username);
-        if (user == null) {
+        Optional<GiphyUser> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
             throw new UsernameNotFoundException(username);
         }
-        return new GiphyUserDetails(user);
+        return new GiphyUserDetails(user.get());
     }
 
     public static class GiphyUserDetails implements UserDetails {

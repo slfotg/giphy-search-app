@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +46,10 @@ public class GiphyUserRepositoryTest {
 
     @Test
     public void testFindByUsername() throws Exception {
-        GiphyUser user = userRepo.findByUsername("sam");
-        assertThat(user.getUsername(), equalTo("sam"));
-        assertThat(user.getId(), equalTo(1));
-        assertThat(user.getPassword(), equalTo("password"));
+        Optional<GiphyUser> user = userRepo.findByUsername("sam");
+        assertThat(user.get().getUsername(), equalTo("sam"));
+        assertThat(user.get().getId(), equalTo(1));
+        assertThat(user.get().getPassword(), equalTo("password"));
     }
 
     @Test
@@ -69,14 +71,14 @@ public class GiphyUserRepositoryTest {
 
     @Test
     public void testFindUserFavorites() throws Exception {
-        GiphyUser user = userRepo.findByUsername("sam");
-        assertThat(user.getFavorites().size(), equalTo(10));
+        Optional<GiphyUser> user = userRepo.findByUsername("sam");
+        assertThat(user.get().getFavorites().size(), equalTo(10));
     }
 
     @Test
     public void testFindCategories() throws Exception {
-        GiphyUser user = userRepo.findByUsername("sam");
-        assertThat(user.getCategories().size(), equalTo(3));
+        Optional<GiphyUser> user = userRepo.findByUsername("sam");
+        assertThat(user.get().getCategories().size(), equalTo(3));
     }
 
     @Test

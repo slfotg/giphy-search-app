@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -18,9 +17,8 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.slfotg.giphy.domain.GifCategory;
 import com.github.slfotg.giphy.domain.GiphyUser;
-import com.github.slfotg.giphy.domain.GiphyUserFavorites;
-import com.github.slfotg.giphy.domain.GiphyUserFavorites.GiphyUserFavoritesId;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
@@ -30,44 +28,44 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
         TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
 @DatabaseSetup("/test_data/giphy_users.xml")
 @SpringBootTest(classes = { TestConfig.class })
-public class GiphyUserFavoritesRepositoryTest {
+public class GifCategoryRepositoryTest {
+
+    @Autowired
+    GifCategoryRepository repo;
 
     @Autowired
     GiphyUserRepository userRepo;
 
-    @Autowired
-    GiphyUserFavoritesRepository favoritesRepo;
-
     @Test
-    public void testFindByGiphyUser() throws Exception {
-        Optional<GiphyUser> user = userRepo.findByUsername("sam");
-        assertTrue(user.isPresent());
-
-        Collection<GiphyUserFavorites> favorites = favoritesRepo.findByIdGiphyUser(user.get());
-        assertThat(favorites.size(), equalTo(10));
+    public void testCount() {
+        assertThat(repo.count(), equalTo(3L));
     }
 
     @Test
-    public void testFindById() throws Exception {
-        final String imageId = "aksdjakga;lja06";
-        Optional<GiphyUser> user = userRepo.findByUsername("sam");
+    public void testSave() {
+        final String newTag = "new tag";
+        Optional<GiphyUser> user = userRepo.findById(1);
         assertTrue(user.isPresent());
 
-        GiphyUserFavoritesId id = new GiphyUserFavoritesId();
-        id.setGiphyUser(user.get());
-        id.setImageId(imageId);
+        GifCategory category = new GifCategory(user.get(), newTag);
+        category = repo.save(category);
 
-        Optional<GiphyUserFavorites> fav = favoritesRepo.findById(id);
-        assertTrue(fav.isPresent());
-        assertThat(fav.get().getGiphyUser().getId(), equalTo(user.get().getId()));
-        assertThat(fav.get().getImageId(), equalTo(imageId));
+        assertThat(repo.count(), equalTo(4L));
+        Optional<GifCategory> newCategory = repo.findOneByGiphyUserAndCategoryName(user.get(), newTag);
+        assertTrue(newCategory.isPresent());
+
+        assertThat(newCategory.get(), equalTo(category));
     }
 
     @Test
-    public void testDelete() throws Exception {
-        favoritesRepo.deleteAll();
+    public void testFindOneByGiphyUserAndCategoryName() {
+        Optional<GiphyUser> user = userRepo.findById(1);
+        assertTrue(user.isPresent());
 
-        assertThat(favoritesRepo.count(), equalTo(0L));
-        assertThat(userRepo.count(), equalTo(2L));
+        Optional<GifCategory> category = repo.findOneByGiphyUserAndCategoryName(user.get(), "funny");
+        assertTrue(category.isPresent());
+        assertThat(category.get().getCategoryName(), equalTo("funny"));
+        assertThat(category.get().getGiphyUser(), equalTo(user.get()));
+        assertThat(category.get().getId(), equalTo(1));
     }
 }

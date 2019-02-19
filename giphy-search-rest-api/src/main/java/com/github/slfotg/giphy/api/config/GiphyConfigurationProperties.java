@@ -32,6 +32,18 @@ public class GiphyConfigurationProperties {
     @NotEmpty
     private String trendingEndpoint;
 
+    @NotNull
+    @NotEmpty
+    private String randomEndpoint;
+
+    @NotNull
+    @NotEmpty
+    private String gifByIdEndpoint;
+
+    @NotNull
+    @NotEmpty
+    private String gifsByIdEndpoint;
+
     public String getHost() {
         return host;
     }
@@ -66,6 +78,30 @@ public class GiphyConfigurationProperties {
 
     public void setTrendingEndpoint(String trendingEndpoint) {
         this.trendingEndpoint = trendingEndpoint;
+    }
+
+    public String getRandomEndpoint() {
+        return randomEndpoint;
+    }
+
+    public void setRandomEndpoint(String randomEndpoint) {
+        this.randomEndpoint = randomEndpoint;
+    }
+
+    public String getGifByIdEndpoint() {
+        return gifByIdEndpoint;
+    }
+
+    public void setGifByIdEndpoint(String gifByIdEndpoint) {
+        this.gifByIdEndpoint = gifByIdEndpoint;
+    }
+
+    public String getGifsByIdEndpoint() {
+        return gifsByIdEndpoint;
+    }
+
+    public void setGifsByIdEndpoint(String gifsByIdEndpoint) {
+        this.gifsByIdEndpoint = gifsByIdEndpoint;
     }
 
 }
