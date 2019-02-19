@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.slfotg.giphy.api.exception.InvalidRequest;
 import com.github.slfotg.giphy.api.exception.MissingDataException;
-import com.github.slfotg.giphy.api.exception.UserHasNoFavorites;
-import com.github.slfotg.giphy.api.exception.UsernameNotFound;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.GifImagesRequest;
 import com.github.slfotg.giphy.api.request.SaveFavoritesRequest;
