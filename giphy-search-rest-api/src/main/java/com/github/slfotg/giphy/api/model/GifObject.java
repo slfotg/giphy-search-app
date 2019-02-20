@@ -1,8 +1,13 @@
 package com.github.slfotg.giphy.api.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GifObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,10 +25,10 @@ public class GifObject implements Serializable {
     private User user;
     private String sourceTld;
     private String sourcePostUrl;
-    private Date updateDatetime;
-    private Date createDatetime;
-    private Date importDatetime;
-    private Date trendingDatetime;
+    private String upStringStringtime;
+    private String createStringtime;
+    private String importStringtime;
+    private String trendingStringtime;
     private Images images;
     private String title;
 
@@ -131,36 +136,36 @@ public class GifObject implements Serializable {
         this.sourcePostUrl = sourcePostUrl;
     }
 
-    public Date getUpdateDatetime() {
-        return updateDatetime;
+    public String getUpStringStringtime() {
+        return upStringStringtime;
     }
 
-    public void setUpdateDatetime(Date updateDatetime) {
-        this.updateDatetime = updateDatetime;
+    public void setUpStringStringtime(String upStringStringtime) {
+        this.upStringStringtime = upStringStringtime;
     }
 
-    public Date getCreateDatetime() {
-        return createDatetime;
+    public String getCreateStringtime() {
+        return createStringtime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateStringtime(String createStringtime) {
+        this.createStringtime = createStringtime;
     }
 
-    public Date getImportDatetime() {
-        return importDatetime;
+    public String getImportStringtime() {
+        return importStringtime;
     }
 
-    public void setImportDatetime(Date importDatetime) {
-        this.importDatetime = importDatetime;
+    public void setImportStringtime(String importStringtime) {
+        this.importStringtime = importStringtime;
     }
 
-    public Date getTrendingDatetime() {
-        return trendingDatetime;
+    public String getTrendingStringtime() {
+        return trendingStringtime;
     }
 
-    public void setTrendingDatetime(Date trendingDatetime) {
-        this.trendingDatetime = trendingDatetime;
+    public void setTrendingStringtime(String trendingStringtime) {
+        this.trendingStringtime = trendingStringtime;
     }
 
     public Images getImages() {

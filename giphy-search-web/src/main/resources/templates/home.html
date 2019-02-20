@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="_csrf" th:content="${_csrf.token}" />
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<base href="/" />
 
 <!-- Custom fonts for this template-->
 <link href="../vendor/fontawesome-free/css/all.min.css" th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css" />
@@ -16,7 +17,7 @@
 </head>
 <body id="page-top" data-ng-app="giphyApp" >
     <!-- Page Wrapper -->
-    <div id="wrapper" data-ng-controller="searchController">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <ul th:replace="layout :: sidebar"></ul>
@@ -58,12 +59,20 @@
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js" th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
-
+    <script>
+    // globals for spring security
+    var token = $("meta[name='_csrf']")[0].content;
+    </script>
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js" th:src="@{/js/sb-admin-2.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-sanitize.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-sanitize.min.js}"></script>
 
     <script sec:authorize="isAuthenticated()" src="../app/scripts/giphyApp.js" th:src="@{/app/scripts/giphyApp.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="../app/controllers/searchController.js" th:src="@{/app/controllers/searchController.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="../app/controllers/trendingController.js" th:src="@{/app/controllers/trendingController.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="../app/controllers/searchResultsController.js" th:src="@{/app/controllers/searchResultsController.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="../app/controllers/viewImageController.js" th:src="@{/app/controllers/viewImageController.js}"></script>
 </body>
 </html>

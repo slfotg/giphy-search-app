@@ -16,6 +16,7 @@ import com.github.slfotg.giphy.api.exception.MissingDataException;
 import com.github.slfotg.giphy.api.exception.TagNameNotFound;
 import com.github.slfotg.giphy.api.exception.UserHasNoFavorites;
 import com.github.slfotg.giphy.api.exception.UsernameNotFound;
+import com.github.slfotg.giphy.api.model.GifByIdResults;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.request.TrendingRequest;
@@ -68,9 +69,9 @@ class DefaultGiphyApiService implements GiphyApiService {
     }
 
     @Override
-    public SearchResults gifById(String gifId) {
+    public GifByIdResults gifById(String gifId) {
         URI gifByIdURI = uriGenerator.generateGifByIdURI(gifId);
-        return restTemplate.getForEntity(gifByIdURI, SearchResults.class).getBody();
+        return restTemplate.getForEntity(gifByIdURI, GifByIdResults.class).getBody();
     }
 
     @Override

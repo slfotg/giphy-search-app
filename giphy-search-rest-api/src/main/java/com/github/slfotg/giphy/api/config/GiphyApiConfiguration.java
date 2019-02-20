@@ -1,6 +1,8 @@
 package com.github.slfotg.giphy.api.config;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.slfotg.giphy.api.exception.GiphyResponseError;
 
@@ -64,7 +67,14 @@ public class GiphyApiConfiguration {
      */
     @Bean
     public ObjectMapper mapper() {
-        return new ObjectMapper();
+        return new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .setDateFormat(dateFormat());
+    }
+
+    @Bean
+    public DateFormat dateFormat() {
+        // 2015-07-17 12:53:16
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     /**

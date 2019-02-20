@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.slfotg.giphy.api.exception.InvalidRequest;
 import com.github.slfotg.giphy.api.exception.MissingDataException;
+import com.github.slfotg.giphy.api.model.GifByIdResults;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.GifImagesRequest;
 import com.github.slfotg.giphy.api.request.SaveFavoritesRequest;
@@ -63,6 +64,12 @@ public class GiphyApiController {
     @ResponseBody
     public SearchResults random() {
         return giphyService.random();
+    }
+
+    @GetMapping("/image/{imageId}")
+    @ResponseBody
+    public GifByIdResults image(@PathVariable String imageId) {
+        return giphyService.gifById(imageId);
     }
 
     @PostMapping("/images")

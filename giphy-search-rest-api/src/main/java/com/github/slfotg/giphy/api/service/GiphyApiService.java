@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.github.slfotg.giphy.api.exception.MissingDataException;
+import com.github.slfotg.giphy.api.model.GifByIdResults;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.request.TrendingRequest;
@@ -16,7 +17,7 @@ public interface GiphyApiService {
 
     SearchResults random();
 
-    SearchResults gifById(String gifId);
+    GifByIdResults gifById(String gifId);
 
     SearchResults gifsById(Collection<String> gifIds);
 
