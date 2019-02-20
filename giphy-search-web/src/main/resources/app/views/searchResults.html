@@ -1,0 +1,12 @@
+<div>
+    <h1>{{page.title}}</h1>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4" data-ng-repeat="gif in data">
+            <div class="h-100 py-2">
+                <a href="#" data-ng-href="/home/viewImage/{{gif.id}}"> <img class="shadow" data-ng-src="{{gif.images.fixed_width.url}}" data-ng-style="{ 'width' : gif.images.fixed_width.width, 'height' : gif.images.fixed_width.height }" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

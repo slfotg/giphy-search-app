@@ -1,5 +1,8 @@
 angular.module("giphyApp").controller("trendingController",
         function($scope, $http) {
+            $scope.page = {
+                title : "Trending Gifs"
+            };
             $scope.trendingRequest = {
                 limit : 25,
                 offset : 0

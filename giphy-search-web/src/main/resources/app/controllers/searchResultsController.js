@@ -2,6 +2,9 @@ angular.module("giphyApp").controller("searchResultsController",
         function($scope, $http, $routeParams) {
             console.log($routeParams.query);
 
+            $scope.page = {
+                title : "Search Results: " + $routeParams.query
+            };
             $scope.searchRequest = {
                 query : $routeParams.query,
                 limit : 25,

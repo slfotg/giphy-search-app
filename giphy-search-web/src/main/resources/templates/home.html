@@ -34,7 +34,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <h1 th:text="#{text.welcome}">Welcome</h1>
+                    <h1 sec:authorize="isAnonymous()" th:text="#{text.welcome}">Welcome</h1>
 
                     <div sec:authorize="isAuthenticated()" data-ng-view></div>
                     <div sec:authorize="isAnonymous()">

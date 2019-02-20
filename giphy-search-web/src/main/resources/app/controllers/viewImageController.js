@@ -1,5 +1,8 @@
 angular.module("giphyApp").controller("viewImageController",
         function($scope, $http, $routeParams) {
+            $scope.page = {
+                title : "Image"
+            };
             $scope.image = {};
             console.log($routeParams.imageId);
             $http({
