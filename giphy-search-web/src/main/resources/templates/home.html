@@ -4,6 +4,8 @@
 
 <title th:text="#{page.title.home}">home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 
 <!-- Custom fonts for this template-->
 <link href="../vendor/fontawesome-free/css/all.min.css" th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css" />
@@ -12,9 +14,9 @@
 <!-- Custom styles for this template-->
 <link href="../css/sb-admin-2.min.css" th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
 </head>
-<body id="page-top">
+<body id="page-top" data-ng-app="giphyApp" >
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" data-ng-controller="searchController">
 
         <!-- Sidebar -->
         <ul th:replace="layout :: sidebar"></ul>
@@ -33,7 +35,7 @@
 
                     <h1 th:text="#{text.welcome}">Welcome</h1>
 
-                    <div sec:authorize="isAuthenticated()" class="row" data-ng-app="trendingApp" data-ng-controller="trendingController">
+                    <div sec:authorize="isAuthenticated()" class="row" data-ng-controller="trendingController">
                         <div class="col-xl-2 col-lg-3 col-md-4 mb-4" data-ng-repeat="gif in data">
                             <div class="h-100 py-2">
                                 <img class="shadow" data-ng-src="{{gif.images.fixed_width.url}}" data-ng-style="{ 'width' : gif.images.fixed_width.width, 'height' : gif.images.fixed_width.height }" />
@@ -65,22 +67,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js" th:src="@{/js/sb-admin-2.min.js}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
 
-    <script>
-                    var app = angular.module("trendingApp", []);
-                    app.controller("trendingController",
-                            function($scope, $http) {
-                                $http({
-                                    method : "GET",
-                                    url : "/api/trending"
-                                }).then(function success(response) {
-                                    console.log(response);
-                                    $scope.data = response.data.data;
-                                }, function error(response) {
-                                    $scope.welcome = "Error";
-                                })
-                            });
-                </script>
+    <script sec:authorize="isAuthenticated()" src="../js/scripts/main.js" th:src="@{/js/scripts/main.js}"></script>
 </body>
 </html>
