@@ -17,7 +17,7 @@ public class RegisterForm implements Serializable {
     private String username;
 
     @NotNull(message = "{message.emptyPassword}")
-    @Size(min = 12, max = 40, message = "{message.passwordLength}")
+    @Size(min = 8, max = 40, message = "{message.passwordLength}")
     private String password;
 
     @NotNull
