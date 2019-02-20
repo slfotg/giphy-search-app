@@ -4,12 +4,13 @@ import java.net.URI;
 import java.util.Collection;
 
 import com.github.slfotg.giphy.api.request.SearchRequest;
+import com.github.slfotg.giphy.api.request.TrendingRequest;
 
 public interface GiphyUriGenerator {
 
     URI generateSearchURI(SearchRequest request);
 
-    URI generateTrendingURI();
+    URI generateTrendingURI(TrendingRequest request);
 
     URI generateRandomURI();
 

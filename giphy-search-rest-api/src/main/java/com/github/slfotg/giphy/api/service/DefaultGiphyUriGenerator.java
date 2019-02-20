@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.github.slfotg.giphy.api.config.GiphyConfigurationProperties;
 import com.github.slfotg.giphy.api.model.MpaaRating;
 import com.github.slfotg.giphy.api.request.SearchRequest;
+import com.github.slfotg.giphy.api.request.TrendingRequest;
 
 @Service
 public class DefaultGiphyUriGenerator implements GiphyUriGenerator {
@@ -40,10 +41,12 @@ public class DefaultGiphyUriGenerator implements GiphyUriGenerator {
     }
 
     @Override
-    public URI generateTrendingURI() {
+    public URI generateTrendingURI(TrendingRequest request) {
         // @formatter:off
         return defaultBuilder()
                 .path(giphyConfig.getTrendingEndpoint())
+                .queryParam(LIMIT_PARAM, request.getLimit())
+                .queryParam(OFFSET_PARAM, request.getOffset())
                 .queryParam(RATING_PARAM, MpaaRating.G)
                 .build().encode().toUri();
         // @formatter:on

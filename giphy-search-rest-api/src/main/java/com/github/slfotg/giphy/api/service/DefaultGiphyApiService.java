@@ -18,6 +18,7 @@ import com.github.slfotg.giphy.api.exception.UserHasNoFavorites;
 import com.github.slfotg.giphy.api.exception.UsernameNotFound;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
+import com.github.slfotg.giphy.api.request.TrendingRequest;
 import com.github.slfotg.giphy.domain.CategorizedGifImage;
 import com.github.slfotg.giphy.domain.GifCategory;
 import com.github.slfotg.giphy.domain.GiphyUser;
@@ -55,8 +56,8 @@ class DefaultGiphyApiService implements GiphyApiService {
     }
 
     @Override
-    public SearchResults trending() {
-        URI trendingURI = uriGenerator.generateTrendingURI();
+    public SearchResults trending(TrendingRequest request) {
+        URI trendingURI = uriGenerator.generateTrendingURI(request);
         return restTemplate.getForEntity(trendingURI, SearchResults.class).getBody();
     }
 

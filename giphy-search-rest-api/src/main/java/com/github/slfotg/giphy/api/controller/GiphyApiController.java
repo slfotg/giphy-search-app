@@ -25,6 +25,7 @@ import com.github.slfotg.giphy.api.request.GifImagesRequest;
 import com.github.slfotg.giphy.api.request.SaveFavoritesRequest;
 import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.request.TagImagesRequest;
+import com.github.slfotg.giphy.api.request.TrendingRequest;
 import com.github.slfotg.giphy.api.response.ErrorResponse;
 import com.github.slfotg.giphy.api.service.GiphyApiService;
 
@@ -52,10 +53,10 @@ public class GiphyApiController {
         return giphyService.search(request);
     }
 
-    @GetMapping("/trending")
+    @PostMapping("/trending")
     @ResponseBody
-    public SearchResults trending() {
-        return giphyService.trending();
+    public SearchResults trending(@RequestBody TrendingRequest request) {
+        return giphyService.trending(request);
     }
 
     @GetMapping("/random")

@@ -6,12 +6,13 @@ import java.util.List;
 import com.github.slfotg.giphy.api.exception.MissingDataException;
 import com.github.slfotg.giphy.api.model.SearchResults;
 import com.github.slfotg.giphy.api.request.SearchRequest;
+import com.github.slfotg.giphy.api.request.TrendingRequest;
 
 public interface GiphyApiService {
 
     SearchResults search(SearchRequest request);
 
-    SearchResults trending();
+    SearchResults trending(TrendingRequest request);
 
     SearchResults random();
 
