@@ -14,7 +14,7 @@ Demo fronted app to search for gifs with the Giphy API
 - [Giphy Api Key](https://developers.giphy.com/dashboard/?create=true)
 
 ## Quickstart
-*Note:* You will need your own private developer key from [Giphy](https://developers.giphy.com/dashboard/?create=true) and will need to be set as an environment variable called GIPHY_API_KEY
+**Note:** You will need your own private developer key from [Giphy](https://developers.giphy.com/dashboard/?create=true) and will need to be set as an environment variable called GIPHY_API_KEY
 ```
 export GIPHY_API_KEY={insert giphy api key here}
 mvn clean install 
