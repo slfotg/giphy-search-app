@@ -98,6 +98,12 @@ public class GiphyApiController {
         return "OK";
     }
 
+    @PostMapping("/tags/{username}")
+    @ResponseBody
+    public String createTag(@PathVariable String username, @RequestBody String tagName) throws MissingDataException {
+        return giphyService.createTag(username, tagName);
+    }
+
     @GetMapping("/tags/{username}")
     @ResponseBody
     public List<String> getTagNames(@PathVariable String username) throws MissingDataException {

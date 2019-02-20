@@ -29,6 +29,8 @@ public interface GiphyApiService {
 
     SearchResults getFavorites(String username) throws MissingDataException;
 
+    String createTag(String username, String tagName) throws MissingDataException;
+
     SearchResults getTaggedImages(String username, String tag) throws MissingDataException;
 
     List<String> getUserTags(String username) throws MissingDataException;

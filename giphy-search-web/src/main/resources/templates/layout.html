@@ -40,8 +40,11 @@
                         <h6 class="collapse-header">Favorites:</h6>
                         <a class="collapse-item" href="#">Favorites</a>
                         <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Tags:</h6>
-                        <a class="collapse-item" href="#">tag1</a> <a class="collapse-item" href="#">tag2</a>
+                        <div data-ng-controller="tagsController">
+                            <h6 class="collapse-header">Tags:</h6>
+                            <a class="collapse-item" href="#" data-ng-click="addTag()">Add Tag</a>
+                            <a data-ng-repeat="tag in tags" class="collapse-item" href="#" data-ng-href="/home/tags/{{tag}}">{{tag}}</a>
+                        </div>
                     </div>
                 </div></li>
 
@@ -88,8 +91,9 @@
                         <li class="topbar-divider d-none d-sm-block"></li>
 
                         <!-- Nav Item - User Information -->
-                        <li sec:authorize="isAuthenticated()" class="nav-item dropdown no-arrow"><button class="btn nav-link dropdown-toggle btn-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="name">Sam Foster</span> <i class="fas fa-fw fa-user"></i>
-                        </button> <!-- Dropdown - User Information -->
+                        <li sec:authorize="isAuthenticated()" class="nav-item dropdown no-arrow"><button class="btn nav-link dropdown-toggle btn-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="username" class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="name">Sam Foster</span> <i class="fas fa-fw fa-user"></i>
+                            </button> <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <form th:action="@{/logout}" method="post">
                                     <button type="submit" class="btn dropdown-item btn-link">

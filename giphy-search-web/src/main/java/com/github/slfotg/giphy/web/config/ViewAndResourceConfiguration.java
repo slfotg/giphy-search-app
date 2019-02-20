@@ -17,6 +17,7 @@ public class ViewAndResourceConfiguration implements WebMvcConfigurer {
         registry.addViewController("/check").setViewName("check");
         registry.addRedirectViewController("/", "/home");
         registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/home/**").setViewName("home");
         registry.addViewController("/login").setViewName("login");
     }
 

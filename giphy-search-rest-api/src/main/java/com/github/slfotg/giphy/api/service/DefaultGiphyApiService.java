@@ -120,6 +120,13 @@ class DefaultGiphyApiService implements GiphyApiService {
 
     @Override
     @Transactional
+    public String createTag(String username, String tagName) throws UsernameNotFound {
+        GiphyUser user = getGiphyUser(username);
+        return gifCategoryRepo.save(new GifCategory(user, tagName)).getCategoryName();
+    }
+
+    @Override
+    @Transactional
     public SearchResults getTaggedImages(String username, String tag) throws UsernameNotFound, TagNameNotFound {
         GiphyUser user = getGiphyUser(username);
         Optional<GifCategory> category = gifCategoryRepo.findOneByGiphyUserAndCategoryName(user, tag);
