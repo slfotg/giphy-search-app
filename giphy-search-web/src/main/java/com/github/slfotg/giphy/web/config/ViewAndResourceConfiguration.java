@@ -25,6 +25,7 @@ public class ViewAndResourceConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");
         registry.addResourceHandler("/vendor/**").addResourceLocations("classpath:/vendor/");
+        registry.addResourceHandler("/app/**").addResourceLocations("classpath:/app/");
     }
 
     @Bean

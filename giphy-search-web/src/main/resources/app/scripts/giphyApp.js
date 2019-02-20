@@ -1,5 +1,10 @@
-var app = angular.module("giphyApp", []);
-
+var app = angular.module("giphyApp", [ "ngRoute" ]);
+app.config(function($routeProvider) {
+    $routeProvider.when("/", {
+        templateUrl : "app/views/trending.html",
+        controller : "trendingController"
+    });
+});
 // globals for spring security
 var token = $("meta[name='_csrf']")[0].content
 

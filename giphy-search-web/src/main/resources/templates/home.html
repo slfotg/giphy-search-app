@@ -35,13 +35,7 @@
 
                     <h1 th:text="#{text.welcome}">Welcome</h1>
 
-                    <div sec:authorize="isAuthenticated()" class="row" data-ng-controller="trendingController">
-                        <div class="col-xl-2 col-lg-3 col-md-4 mb-4" data-ng-repeat="gif in data">
-                            <div class="h-100 py-2">
-                                <img class="shadow" data-ng-src="{{gif.images.fixed_width.url}}" data-ng-style="{ 'width' : gif.images.fixed_width.width, 'height' : gif.images.fixed_width.height }" />
-                            </div>
-                        </div>
-                    </div>
+                    <div sec:authorize="isAuthenticated()" data-ng-view></div>
                     <div sec:authorize="isAnonymous()">
                         <hr />
                         <h3>Welcome to the Giphy Search App</h3>
@@ -70,6 +64,6 @@
     <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
     <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
 
-    <script sec:authorize="isAuthenticated()" src="../js/scripts/main.js" th:src="@{/js/scripts/main.js}"></script>
+    <script sec:authorize="isAuthenticated()" src="../app/scripts/giphyApp.js" th:src="@{/app/scripts/giphyApp.js}"></script>
 </body>
 </html>
