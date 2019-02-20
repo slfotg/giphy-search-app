@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head lang="en">
 
 <title th:text="#{page.title.home}">home</title>
@@ -33,11 +33,22 @@
 
                     <h1 th:text="#{text.welcome}">Welcome</h1>
 
-                    <div class="row" data-ng-app="trendingApp" data-ng-controller="trendingController">
+                    <div sec:authorize="isAuthenticated()" class="row" data-ng-app="trendingApp" data-ng-controller="trendingController">
                         <div class="col-xl-2 col-lg-3 col-md-4 mb-4" data-ng-repeat="gif in data">
                             <div class="h-100 py-2">
                                 <img class="shadow" data-ng-src="{{gif.images.fixed_width.url}}" data-ng-style="{ 'width' : gif.images.fixed_width.width, 'height' : gif.images.fixed_width.height }" />
                             </div>
+                        </div>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <hr />
+                        <h3>Welcome to the Giphy Search App</h3>
+                        <div>
+                            This app allows users to search for gifs using the GIPHY API. 
+                            Users can search for gifs, save to their favorites, and organize their favorites into different categories.
+                        </div>
+                        <div>
+                            Please <a href="login.html" th:href="@{/login}">login</a> or <a href="register.html" th:href="@{/register}">register</a> to start using this app.
                         </div>
                     </div>
                 </div>
