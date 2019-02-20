@@ -14,6 +14,7 @@ Demo fronted app to search for gifs with the Giphy API
 - [Giphy Api Key](https://developers.giphy.com/dashboard/?create=true)
 
 ## Quickstart
+*Note:* You will need your own private developer key from [Giphy](https://developers.giphy.com/dashboard/?create=true) and will need to be set as an environment variable called GIPHY_API_KEY
 ```
 export GIPHY_API_KEY={insert giphy api key here}
 mvn clean install 
@@ -37,12 +38,14 @@ mvn docker:build
 ```
 
 Next start the MySQL database (Docker instructions below)
+
 Manual database scripts can be found in giphy-search-db/scripts
 ```
 docker run -d -p 3306:3306 --name=giphy-db --restart=always slfotg/giphy-search-db:0.0.1-SNAPSHOT
 ```
 
 Start the rest-api project with the local profile
+
 Command line: (GIPHY_API_KEY environment variable must be set)
 ```
 java -jar -Dspring.profiles.active=local giphy-search-rest-api/target/giphy-search-rest-api-0.0.1-SNAPSHOT.jar
