@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
 <title th:text="#{page.title.home}">home</title>
@@ -34,20 +34,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <h1 sec:authorize="isAnonymous()" th:text="#{text.welcome}">Welcome</h1>
-
-                    <div sec:authorize="isAuthenticated()" data-ng-view></div>
-                    <div sec:authorize="isAnonymous()">
-                        <hr />
-                        <h3>Welcome to the Giphy Search App</h3>
-                        <div>
-                            This app allows users to search for gifs using the GIPHY API. 
-                            Users can search for gifs, save to their favorites, and organize their favorites into different categories.
-                        </div>
-                        <div>
-                            Please <a href="login.html" th:href="@{/login}">login</a> or <a href="register.html" th:href="@{/register}">register</a> to start using this app.
-                        </div>
-                    </div>
+                    <div data-ng-view></div>
                 </div>
             </div>
         </div>
@@ -59,23 +46,23 @@
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js" th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" >
+    <script>
     // globals for spring security
     var token = $("meta[name='_csrf']")[0].content;
     var username = $("#username").text();
     </script>
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js" th:src="@{/js/sb-admin-2.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-sanitize.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-sanitize.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular.min.js" th:src="@{/webjars/angularjs/1.7.6/angular.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-route.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-route.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.6/angular-sanitize.min.js" th:src="@{/webjars/angularjs/1.7.6/angular-sanitize.min.js}"></script>
 
-    <script sec:authorize="isAuthenticated()" src="../app/scripts/giphyApp.js" th:src="@{/app/scripts/giphyApp.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/services/giphyApi.js" th:src="@{/app/services/giphyApi.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/controllers/searchController.js" th:src="@{/app/controllers/searchController.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/controllers/trendingController.js" th:src="@{/app/controllers/trendingController.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/controllers/searchResultsController.js" th:src="@{/app/controllers/searchResultsController.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/controllers/viewImageController.js" th:src="@{/app/controllers/viewImageController.js}"></script>
-    <script sec:authorize="isAuthenticated()" src="../app/controllers/tagsController.js" th:src="@{/app/controllers/tagsController.js}"></script>
+    <script src="../app/scripts/giphyApp.js" th:src="@{/app/scripts/giphyApp.js}"></script>
+    <script src="../app/services/giphyApi.js" th:src="@{/app/services/giphyApi.js}"></script>
+    <script src="../app/controllers/searchController.js" th:src="@{/app/controllers/searchController.js}"></script>
+    <script src="../app/controllers/trendingController.js" th:src="@{/app/controllers/trendingController.js}"></script>
+    <script src="../app/controllers/searchResultsController.js" th:src="@{/app/controllers/searchResultsController.js}"></script>
+    <script src="../app/controllers/viewImageController.js" th:src="@{/app/controllers/viewImageController.js}"></script>
+    <script src="../app/controllers/tagsController.js" th:src="@{/app/controllers/tagsController.js}"></script>
 </body>
 </html>

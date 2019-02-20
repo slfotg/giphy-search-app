@@ -25,7 +25,6 @@
         <docker.mysql.password>giphyPassword</docker.mysql.password>
         <docker.mysql.url>jdbc:mysql://db:3306/${docker.mysql.database}?verifyServerCertificate=false&amp;useSSL=true</docker.mysql.url>
         <docker.db.alias>db</docker.db.alias>
-        <docker.rest.alias>rest</docker.rest.alias>
         <docker.web.alias>web</docker.web.alias>
     </properties>
 
@@ -177,32 +176,6 @@
                         </image>
 
                         <image>
-                            <alias>${docker.rest.alias}</alias>
-                            <name>slfotg/giphy-search-rest-api:${project.version}</name>
-
-                            <run>
-                                <env>
-                                    <GIPHY_API_KEY>${env.GIPHY_API_KEY}</GIPHY_API_KEY>
-                                </env>
-                                <ports>
-                                    <port>18081:8080</port>
-                                    <port>18001:8000</port>
-                                </ports>
-                                <wait>
-                                    <url>http://${docker.host.address}:18081/api/</url>
-                                    <time>60000</time>
-                                </wait>
-                                <links>
-                                    <link>${docker.db.alias}:${docker.db.alias}</link>
-                                </links>
-                                <log>
-                                    <prefix>REST</prefix>
-                                    <color>green</color>
-                                </log>
-                            </run>
-                        </image>
-
-                        <image>
                             <alias>${docker.web.alias}</alias>
                             <name>slfotg/giphy-search-web:${project.version}</name>
 
@@ -212,8 +185,7 @@
                                     <GIPHY_DATASOURCE_USERNAME>${docker.mysql.user}</GIPHY_DATASOURCE_USERNAME>
                                     <GIPHY_DATASOURCE_PASSWORD>${docker.mysql.password}</GIPHY_DATASOURCE_PASSWORD>
                                     <SPRING_PROFILES_ACTIVE>docker</SPRING_PROFILES_ACTIVE>
-                                    <GIPHY_REST_HOST>${docker.rest.alias}</GIPHY_REST_HOST>
-                                    <GIPHY_REST_PORT>8080</GIPHY_REST_PORT>
+                                    <GIPHY_API_KEY>${env.GIPHY_API_KEY}</GIPHY_API_KEY>
                                 </env>
                                 <ports>
                                     <port>18080:8080</port>
@@ -221,7 +193,6 @@
                                 </ports>
                                 <links>
                                     <link>${docker.db.alias}:${docker.db.alias}</link>
-                                    <link>${docker.rest.alias}:${docker.rest.alias}</link>
                                 </links>
                                 <log>
                                     <prefix>WEB</prefix>

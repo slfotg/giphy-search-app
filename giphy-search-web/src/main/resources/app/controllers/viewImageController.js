@@ -7,7 +7,7 @@ angular.module("giphyApp").controller("viewImageController",
             console.log($routeParams.imageId);
             $http({
                 method : "GET",
-                url : "/api/image/" + $routeParams.imageId
+                url : "/v1/gifs/" + $routeParams.imageId
             }).then(function success(response) {
                 console.log(response);
                 $scope.image.title = response.data.data.title;

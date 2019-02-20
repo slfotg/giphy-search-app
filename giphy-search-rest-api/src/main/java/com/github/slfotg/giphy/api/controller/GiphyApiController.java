@@ -1,13 +1,9 @@
 package com.github.slfotg.giphy.api.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,16 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.slfotg.giphy.api.exception.InvalidRequest;
 import com.github.slfotg.giphy.api.exception.MissingDataException;
-import com.github.slfotg.giphy.api.model.GifByIdResults;
-import com.github.slfotg.giphy.api.model.SearchResults;
-import com.github.slfotg.giphy.api.request.GifImagesRequest;
 import com.github.slfotg.giphy.api.request.SaveFavoritesRequest;
-import com.github.slfotg.giphy.api.request.SearchRequest;
 import com.github.slfotg.giphy.api.request.TagImagesRequest;
-import com.github.slfotg.giphy.api.request.TrendingRequest;
-import com.github.slfotg.giphy.api.response.ErrorResponse;
 import com.github.slfotg.giphy.api.service.GiphyApiService;
 
 @RestController
@@ -43,41 +32,6 @@ public class GiphyApiController {
         return "OK";
     }
 
-    @PostMapping("/search")
-    @ResponseBody
-    public SearchResults search(@RequestBody @Valid SearchRequest request, BindingResult bindingResult, Errors errors)
-            throws InvalidRequest {
-
-        if (bindingResult.hasErrors()) {
-            throw new InvalidRequest(errors);
-        }
-        return giphyService.search(request);
-    }
-
-    @PostMapping("/trending")
-    @ResponseBody
-    public SearchResults trending(@RequestBody TrendingRequest request) {
-        return giphyService.trending(request);
-    }
-
-    @GetMapping("/random")
-    @ResponseBody
-    public SearchResults random() {
-        return giphyService.random();
-    }
-
-    @GetMapping("/image/{imageId}")
-    @ResponseBody
-    public GifByIdResults image(@PathVariable String imageId) {
-        return giphyService.gifById(imageId);
-    }
-
-    @PostMapping("/images")
-    @ResponseBody
-    public SearchResults images(@RequestBody GifImagesRequest request) {
-        return giphyService.gifsById(request.getImageIds());
-    }
-
     @PostMapping("/favorites")
     @ResponseBody
     public String saveFavorites(@RequestBody SaveFavoritesRequest request) throws MissingDataException {
@@ -87,7 +41,7 @@ public class GiphyApiController {
 
     @GetMapping("/favorites/{username}")
     @ResponseBody
-    public SearchResults getFavorites(@PathVariable String username) throws MissingDataException {
+    public Collection<String> getFavorites(@PathVariable String username) throws MissingDataException {
         return giphyService.getFavorites(username);
     }
 
@@ -106,13 +60,13 @@ public class GiphyApiController {
 
     @GetMapping("/tags/{username}")
     @ResponseBody
-    public List<String> getTagNames(@PathVariable String username) throws MissingDataException {
+    public Collection<String> getTagNames(@PathVariable String username) throws MissingDataException {
         return giphyService.getUserTags(username);
     }
 
     @GetMapping("/tags/{username}/{tagName}")
     @ResponseBody
-    public SearchResults getTaggedImages(@PathVariable("username") String username,
+    public Collection<String> getTaggedImages(@PathVariable("username") String username,
             @PathVariable("tagName") String tagName) throws MissingDataException {
         return giphyService.getTaggedImages(username, tagName);
     }
@@ -122,12 +76,5 @@ public class GiphyApiController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String missingDataHandler(MissingDataException missingDataException) {
         return missingDataException.getMessage();
-    }
-
-    @ExceptionHandler(InvalidRequest.class)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleException(InvalidRequest invalidForm) {
-        return invalidForm.getErrorResponse();
     }
 }

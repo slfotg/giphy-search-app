@@ -6,9 +6,10 @@ angular.module("giphyApp").controller("searchResultsController",
                 title : "Search Results: " + $routeParams.query
             };
             $scope.searchRequest = {
-                query : $routeParams.query,
+                q : $routeParams.query,
                 limit : 25,
-                offset : 0
+                offset : 0,
+                rating: "g"
             };
 
             $scope.getSearchResults = function() {
@@ -20,12 +21,9 @@ angular.module("giphyApp").controller("searchResultsController",
                 // Add to offset for loading more images
                 $scope.searchRequest.offset += $scope.searchRequest.limit;
                 $http({
-                    method : "POST",
-                    url : "/api/search",
-                    headers : {
-                        "X-CSRF-TOKEN" : token
-                    },
-                    data : searchRequest
+                    method : "GET",
+                    url : "/v1/gifs/search",
+                    params : searchRequest
                 }).then(function success(response) {
                     console.log(response);
                     $scope.data = response.data.data;

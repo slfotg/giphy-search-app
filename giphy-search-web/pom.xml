@@ -13,6 +13,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>giphy-search-persistence</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>giphy-search-rest-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -75,6 +79,11 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -98,6 +107,7 @@
                 <configuration>
                     <images>
                         <image>
+                            <alias>${docker.web.alias}</alias>
                             <name>slfotg/${project.artifactId}:${project.version}</name>
                             <build>
                                 <from>openjdk:8u191-jre-alpine3.9</from>

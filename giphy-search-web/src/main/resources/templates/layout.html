@@ -27,13 +27,13 @@
             <li><hr class="sidebar-divider my-0"></li>
 
             <!-- Nav Item - Dashboard -->
-            <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="index.html"> <i class="fas fa-fw fa-chart-line"></i> <span>Trending</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html"> <i class="fas fa-fw fa-chart-line"></i> <span>Trending</span></a></li>
 
             <!-- Divider -->
-            <li sec:authorize="isAuthenticated()"><hr class="sidebar-divider"></li>
+            <li><hr class="sidebar-divider"></li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li sec:authorize="isAuthenticated()" class="nav-item collapsed"><a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages"> <i class="far fa-fw fa-star"></i> <span>Favorites</span>
+            <li class="nav-item collapsed"><a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages"> <i class="far fa-fw fa-star"></i> <span>Favorites</span>
             </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -49,7 +49,7 @@
                 </div></li>
 
             <!-- Divider -->
-            <li sec:authorize="isAuthenticated()"><hr class="sidebar-divider"></li>
+            <li><hr class="sidebar-divider"></li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <li class="text-center"><div class="text-center d-noned-md-inline">
@@ -74,9 +74,9 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form sec:authorize="isAuthenticated()" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group" data-ng-controller="searchController">
-                            <input type="text" data-ng-keypress="$event.keyCode == 13 && executeSearch()" data-ng-model="query" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" data-ng-keypress="$event.keyCode == 13 && executeSearch()" data-ng-model="q" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" data-ng-click="executeSearch()">
                                     <i class="fas fa-search fa-sm"></i>
@@ -91,7 +91,7 @@
                         <li class="topbar-divider d-none d-sm-block"></li>
 
                         <!-- Nav Item - User Information -->
-                        <li sec:authorize="isAuthenticated()" class="nav-item dropdown no-arrow"><button class="btn nav-link dropdown-toggle btn-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown no-arrow"><button class="btn nav-link dropdown-toggle btn-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="username" class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="name">Sam Foster</span> <i class="fas fa-fw fa-user"></i>
                             </button> <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -102,9 +102,6 @@
                                     <input type="hidden" name="X-CSRF-TOKEN" th:value="${_csrf.token}" />
                                 </form>
                             </div></li>
-
-                        <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="login">Login</a></li>
-                        <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="register">Register</a></li>
 
                     </ul>
 

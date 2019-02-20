@@ -13,12 +13,9 @@ angular.module("giphyApp").controller("trendingController",
                 // Add to offset for loading more images
                 $scope.trendingRequest.offset += $scope.trendingRequest.limit;
                 $http({
-                    method : "POST",
-                    url : "/api/trending",
-                    headers : {
-                        "X-CSRF-TOKEN" : token
-                    },
-                    data : trendingRequest
+                    method : "GET",
+                    url : "/v1/gifs/trending",
+                    params : trendingRequest
                 }).then(function success(response) {
                     console.log(response);
                     $scope.data = response.data.data;

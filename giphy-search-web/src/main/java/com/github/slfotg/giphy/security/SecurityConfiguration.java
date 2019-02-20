@@ -15,12 +15,13 @@ import com.github.slfotg.giphy.service.GiphyUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private static final String HOME = "/home";
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // @formatter:off
         httpSecurity.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/home").permitAll()
                 .antMatchers("/check").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/webjars/**").permitAll()
@@ -31,12 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
+                .defaultSuccessUrl(HOME)
                 .permitAll()
                 .and()
             .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/home")
+                .logoutSuccessUrl("/")
                 .permitAll();
         // @formatter:on
     }
