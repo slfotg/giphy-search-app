@@ -130,7 +130,7 @@
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <configuration>
-                    <format>HTML</format>
+                    <format>XML</format>
                     <outputDirectory>${dependency.check.report.dir}</outputDirectory>
                 </configuration>
                 <executions>
